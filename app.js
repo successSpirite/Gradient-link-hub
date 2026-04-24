@@ -1,30 +1,46 @@
 const section = document.querySelector('.section');
 const toggleSwitch = document.querySelectorAll('.cl-toggle-switch');
 
-toggleSwitch.forEach( tog=>{
-  tog.addEventListener('change', ()=>{
-  console.log("hi");
-  section.classList.toggle('dark-mode');
 
 
+
+document.addEventListener('DOMContentLoaded', ()=>{
+const saveThem = localStorage.getItem("sectionTheme");
+
+if (saveThem === 'dark') { 
+  section.classList.add('dark-mode');
+
+  //chechecking all the toggle if the darkmode is on 
+
+  toggleSwitch.forEach(tog => tog.checked = true);
+} else {
+    section.classList.remove('dark-mode');
+  toggleSwitch.forEach(tog => tog.checked = false);
+}
+
+
+  
 });
 
 
+toggleSwitch.forEach(tog => {
+  tog.addEventListener('change', ()=>{
+
+    console.log("hi");
+  section.classList.toggle('dark-mode');
+
+  //save to local storage after toggling 
 
   if (section.classList.contains("dark-mode")) {
     localStorage.setItem("sectionTheme", "dark");
     
-  } else {
+  }
+   else {
     localStorage.setItem("sectionTheme", "light");
   }
-});
 
-// Keep state after refresh
-window.addEventListener("load", () => {
-  if (localStorage.getItem("sectionTheme") === "dark") {
-    section.classList.add("dark-mode");
-    toggle.checked = true;
-  }
+
+  });
 });
 
 
@@ -40,7 +56,7 @@ ScrollReveal({
   });
 
   //  Hero image 
-  ScrollReveal().reveal('.photo', { 
+  ScrollReveal().reveal('.photo , .social_icons', { 
     delay: 100, 
     origin: 'top',
     distance: '20px',
@@ -59,7 +75,7 @@ ScrollReveal({
     delay: 400,       // wait until header is done
     interval: 100,    // 100ms between each box = smooth wave
     origin: 'bottom',
-    scale: 0.95       // tiny zoom-in makes it pop
+    scale: 0.95     // tiny zoom-in makes it pop
   });
   
 
